@@ -13,13 +13,27 @@ module Seg8_Display(
     output reg [7:0]  Seg_EN ;       // 数码管使能引脚,位选
     output reg [7:0] Seg_LED ;       // 数码管段选
     // 逻辑书写
-    // 1. 数码管动态刷新
-    reg [2:0] Seg_num ; // 数码管的编号(位选)
+    // 扫描编号
+    reg [2:0] Seg_num ;
+    // 定时计数器
+    reg [27:0] cnt ;
+    // 1. 统一同步块：计数器 + Seg_num + Seg_EN
     always @(posedge clk or negedge Reset_n)
         if (!Reset_n) begin
+            cnt     <= 0 ;
+            Seg_num <= 0 ;
             Seg_EN  <= 8'b1111_1111 ;
         end
-        else 
+        else begin
+            // 计数器
+            if (cnt == 50_000 - 1) begin      // 1ms
+                cnt     <= 0 ;
+                Seg_num <= Seg_num + 1'b1 ;   // 下一位
+            end
+            else
+                cnt <= cnt + 1'b1 ;
+            
+            // 位选（低有效）
             case(Seg_num)
                 3'd0 :  Seg_EN <= 8'b1111_1110 ;
                 3'd1 :  Seg_EN <= 8'b1111_1101 ;
@@ -30,21 +44,9 @@ module Seg8_Display(
                 3'd6 :  Seg_EN <= 8'b1011_1111 ;
                 3'd7 :  Seg_EN <= 8'b0111_1111 ;
                 default: Seg_EN <= 8'b1111_1111 ;
-            endcase 
-    // 2. 定时器,周期为1s,1_000_000_000 / 20 = 50_000_000
-    reg [27:0] cnt ;
-    always @(posedge clk or negedge Reset_n)
-        if (!Reset_n) begin 
-            cnt <= 0 ;
-            Seg_num <= 0 ;
-        end
-        else if (cnt == 50_000 - 1)     // 1ms变换一个位选
-            Seg_num <= Seg_num + 1 ;    // 位选+1,会自动溢出
-        else if (cnt == 50_000_000 - 1) // 1s周期
-            cnt <= 0 ;
-        else 
-            cnt <= cnt + 1'b1 ;      
-    // 3. 字符选择 , 四位 , 从32位输入中取
+            endcase
+        end    
+    // 2. 字符选择 , 四位 , 从32位输入中取
     reg [3:0] Seg_Display ;
     always @(posedge clk or negedge Reset_n)
         if (!Reset_n)
@@ -61,7 +63,7 @@ module Seg8_Display(
                 3'd7 : Seg_Display <= Display_Data[31:28] ;
                 default : Seg_Display <= 4'd0 ;
             endcase 
-    // 4. 数码管展示数据
+    // 3. 数码管展示数据
     always @(posedge clk or negedge Reset_n)
         if (!Reset_n)
             Seg_LED <= 8'b1111_1111 ;

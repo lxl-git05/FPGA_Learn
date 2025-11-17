@@ -16,7 +16,7 @@ module Seg_8_Display_Test(
     Seg8_Display(
         .clk(clk) ,
         .Reset_n(Reset_n) ,
-        .Display_Data(32'h12345678) ,
+        .Display_Data(32'h1234567f) ,
         .Seg_EN(Seg_EN) ,
         .Seg_LED(Seg_LED)
     );
