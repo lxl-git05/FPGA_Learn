@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../Dian_Seg8_Task1.srcs/sources_1/new/Seg8_Display.v" \
+"../../../../Dian_Seg8_Task1.srcs/sim_1/new/Seg_8_Display_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
