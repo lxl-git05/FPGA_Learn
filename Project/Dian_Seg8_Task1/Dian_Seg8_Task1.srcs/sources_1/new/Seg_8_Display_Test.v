@@ -13,13 +13,12 @@ module Seg_8_Display_Test(
     output [7:0] Seg_LED ;       // ÊıÂë¹Ü¶ÎÑ¡
     
     // Âß¼­
-    Seg8_Display(
+    Seg8_Display Seg8_Display_test_1(
         .clk(clk) ,
         .Reset_n(Reset_n) ,
-        .Display_Data(32'h1234567f) ,
+        .Display_Data(32'h1234567f) ,    
         .Seg_EN(Seg_EN) ,
         .Seg_LED(Seg_LED)
     );
-    
     
 endmodule

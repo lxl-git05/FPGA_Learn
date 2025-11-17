@@ -168,3 +168,32 @@ Thumbs.db
 # Vivado / Vitis hardware handoff
 **/*.xsa
 
+# 忽略Vivado运行目录（综合/实现的所有中间文件）
+runs/
+
+# 忽略Vivado临时日志与报告（若需要保留报告，可删除对应行）
+*.log
+*.jou
+*.html
+*.xml
+*.checkpoint
+
+# 忽略比特流文件（若需要版本控制比特流，可删除此行）
+*.bit
+*.bin
+*.ltx
+
+# 忽略自动生成的脚本（如ISEWrap、runme等）
+*.js
+*.sh
+
+# 忽略临时数据文件
+*.wdf
+*.rst
+
+# 保留核心文件（避免误删，可选）
+!*.xpr       # 保留项目配置文件
+!*.v         # 保留Verilog源文件
+!*.sv        # 保留SystemVerilog源文件
+!*.xdc       # 保留约束文件
+!*.tcl       # 保留Tcl脚本

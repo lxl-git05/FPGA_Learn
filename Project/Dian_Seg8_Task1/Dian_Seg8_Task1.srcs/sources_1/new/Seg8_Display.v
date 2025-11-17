@@ -68,27 +68,29 @@ module Seg8_Display(
         if (!Reset_n)
             Seg_LED <= 8'b1111_1111 ;
         else 
-            case(Seg_Display) 
-                4'h0 : Seg_LED <= 8'b1100_0000;   // 0
-                4'h1 : Seg_LED <= 8'b1111_1001;   // 1
-                4'h2 : Seg_LED <= 8'b1010_0100;   // 2
-                4'h3 : Seg_LED <= 8'b1011_0000;   // 3
-                4'h4 : Seg_LED <= 8'b1001_1001;   // 4
-                4'h5 : Seg_LED <= 8'b1001_0010;   // 5
-                4'h6 : Seg_LED <= 8'b1000_0010;   // 6
-                4'h7 : Seg_LED <= 8'b1111_1000;   // 7
-                4'h8 : Seg_LED <= 8'b1000_0000;   // 8
-                4'h9 : Seg_LED <= 8'b1001_0000;   // 9
+            case (Seg_Display)
+                4'h0 : Seg_LED <= 8'b1100_0000; // 0
+                4'h1 : Seg_LED <= 8'b1111_1001; // 1
+                4'h2 : Seg_LED <= 8'b1010_0100; // 2
+                4'h3 : Seg_LED <= 8'b1011_0000; // 3
+                4'h4 : Seg_LED <= 8'b1001_1001; // 4
+                4'h5 : Seg_LED <= 8'b1001_0010; // 5
+                4'h6 : Seg_LED <= 8'b1000_0010; // 6
+                4'h7 : Seg_LED <= 8'b1111_1000; // 7
+                4'h8 : Seg_LED <= 8'b1000_0000; // 8
+                4'h9 : Seg_LED <= 8'b1001_0000; // 9
                 4'hA : Seg_LED <= 8'b1000_1000;   // A
-                4'hB : Seg_LED <= 8'b1000_0011;   // b
-                4'hC : Seg_LED <= 8'b1100_0110;   // C
-                4'hD : Seg_LED <= 8'b1010_0001;   // d
+                4'hB : Seg_LED <= 8'b1010_0011;   // o
+                4'hC:  Seg_LED <= 8'b1000_1001;   // H
+                4'hD:  Seg_LED <= 8'b1100_0111;   // L
                 4'hE : Seg_LED <= 8'b1000_0110;   // E
-                4'hF : Seg_LED <= 8'b1000_1110;   // F
-                default : Seg_LED <= 8'b1111_1111 ; // 不显示
-            endcase 
+                default : Seg_LED <= 8'b1111_1111; // 不显示
+            endcase
 endmodule
 
-
+// hello : fffc_eddb
+// hi    : ffff_ffc1
+// haha  : ffff_caca
+// hehea : fffc_ecea
 
 

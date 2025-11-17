@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "D:/FPGA/FPGA_Learn/FPGA_Learn/Project/Dian_Seg8_Task1/Dian_Seg8_Task1.runs/synth_1/Seg_8_Display_Test.tcl"
+  variable script "D:/FPGA/FPGA_Learn/FPGA_Learn/Project/Dian_Seg8_Task1/Dian_Seg8_Task1.runs/synth_1/Clock.tcl"
   variable category "vivado_synth"
 }
 
@@ -72,7 +72,6 @@ proc create_report { reportName command } {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 4
 set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-1
 
@@ -89,7 +88,7 @@ OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
   D:/FPGA/FPGA_Learn/FPGA_Learn/Project/Dian_Seg8_Task1/Dian_Seg8_Task1.srcs/sources_1/new/Seg8_Display.v
-  D:/FPGA/FPGA_Learn/FPGA_Learn/Project/Dian_Seg8_Task1/Dian_Seg8_Task1.srcs/sources_1/new/Seg_8_Display_Test.v
+  D:/FPGA/FPGA_Learn/FPGA_Learn/Project/Dian_Seg8_Task1/Dian_Seg8_Task1.srcs/sources_1/new/Clock.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -103,13 +102,19 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 read_xdc D:/FPGA/FPGA_Learn/FPGA_Learn/Project/Dian_Seg8_Task1/Dian_Seg8_Task1.srcs/constrs_1/new/Seg_8_Display_Pin.xdc
 set_property used_in_implementation false [get_files D:/FPGA/FPGA_Learn/FPGA_Learn/Project/Dian_Seg8_Task1/Dian_Seg8_Task1.srcs/constrs_1/new/Seg_8_Display_Pin.xdc]
 
+read_xdc D:/FPGA/FPGA_Learn/FPGA_Learn/Project/Dian_Seg8_Task1/Dian_Seg8_Task1.srcs/constrs_1/new/Key_Pin.xdc
+set_property used_in_implementation false [get_files D:/FPGA/FPGA_Learn/FPGA_Learn/Project/Dian_Seg8_Task1/Dian_Seg8_Task1.srcs/constrs_1/new/Key_Pin.xdc]
+
+read_xdc D:/FPGA/FPGA_Learn/FPGA_Learn/Project/Dian_Seg8_Task1/Dian_Seg8_Task1.srcs/constrs_1/new/Seg_8_Display_Test_Pin.xdc
+set_property used_in_implementation false [get_files D:/FPGA/FPGA_Learn/FPGA_Learn/Project/Dian_Seg8_Task1/Dian_Seg8_Task1.srcs/constrs_1/new/Seg_8_Display_Test_Pin.xdc]
+
 set_param ips.enableIPCacheLiteLoad 1
 
 read_checkpoint -auto_incremental -incremental D:/FPGA/FPGA_Learn/FPGA_Learn/Project/Dian_Seg8_Task1/Dian_Seg8_Task1.srcs/utils_1/imports/synth_1/Seg8_Display.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top Seg_8_Display_Test -part xc7a100tcsg324-1
+synth_design -top Clock -part xc7a100tcsg324-1
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"
@@ -119,10 +124,10 @@ if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
 OPTRACE "write_checkpoint" START { CHECKPOINT }
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef Seg_8_Display_Test.dcp
+write_checkpoint -force -noxdef Clock.dcp
 OPTRACE "write_checkpoint" END { }
 OPTRACE "synth reports" START { REPORT }
-create_report "synth_1_synth_report_utilization_0" "report_utilization -file Seg_8_Display_Test_utilization_synth.rpt -pb Seg_8_Display_Test_utilization_synth.pb"
+create_report "synth_1_synth_report_utilization_0" "report_utilization -file Clock_utilization_synth.rpt -pb Clock_utilization_synth.pb"
 OPTRACE "synth reports" END { }
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]
