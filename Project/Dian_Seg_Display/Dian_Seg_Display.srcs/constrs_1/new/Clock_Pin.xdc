@@ -1,12 +1,20 @@
 # 时钟引脚 clk
 set_property IOSTANDARD LVCMOS33 [get_ports clk]
-
 set_property PACKAGE_PIN E3 [get_ports clk]
 
 # 使能引脚 Seg_Enable
 set_property IOSTANDARD LVCMOS33 [get_ports Reset_n]
-
 set_property PACKAGE_PIN J15 [get_ports Reset_n]
+
+# 按键
+set_property IOSTANDARD LVCMOS33 [get_ports Key1]
+set_property PACKAGE_PIN L16 [get_ports Key1]
+
+set_property IOSTANDARD LVCMOS33 [get_ports Key2]
+set_property PACKAGE_PIN M13 [get_ports Key2]
+
+set_property IOSTANDARD LVCMOS33 [get_ports Key3]
+set_property PACKAGE_PIN R15 [get_ports Key3]
 
 # 数码管使能引脚和七段+小数点引脚
 set_property IOSTANDARD LVCMOS33 [get_ports {Seg_LED[7]}]
@@ -44,8 +52,4 @@ set_property PACKAGE_PIN P14 [get_ports {Seg_EN[4]}]
 set_property PACKAGE_PIN T14 [get_ports {Seg_EN[5]}]
 set_property PACKAGE_PIN K2 [get_ports  {Seg_EN[6]}]
 set_property PACKAGE_PIN U13 [get_ports {Seg_EN[7]}]
-
-## BTNL 按键
-#set_property PACKAGE_PIN P17 [get_ports key_in]
-#set_property IOSTANDARD LVCMOS33 [get_ports key_in]
 
