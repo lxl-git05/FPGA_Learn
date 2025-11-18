@@ -106,94 +106,72 @@ Thumbs.db
 **/main.synctex.gz
 **/main.aux
 
-# ========================================
-# Vivado / Xilinx FPGA 工程忽略文件
-# ========================================
-
-# Vivado 自动生成的大型缓存与临时目录
-**/.Xil/
-**/.runs/
-**/.cache/
-**/.hw/
-**/.ip_user_files/
-**/.sim/
-**/.webtalk/
-
-# Vivado 导出生成的目录
-**/project_*/
-**/ipshared/
-**/component.xml
-
-# 仿真输出
-**/xsim.dir/
-**/*.log
-**/*.jou
-**/*.pb
-**/*.wdb
-**/*.svf
-
-# Vivado 板卡与硬件相关输出文件
-**/*.ltx
-**/*.bit
-**/*.bin
-**/*.mcs
-**/*.prm
-**/*.rpt
-
-# Vivado 编译中间文件
-**/*.cache
-**/*.str
-**/*.html
-**/*.xlm
-**/*.dcp
-**/*.bd.bak
-
-# Block Design 自动生成文件
-**/*.bd.user
-**/*.crs
-**/*.tcl.bak
-
-# IP 生成的临时文件
-**/*.xcix
-**/*.xml
-**/*_stub.v
-**/*_stub.vhdl
-
-# Vivado HLS / Vitis HLS
-**/solution*/syn/
-**/solution*/impl/
-**/solution*/.autopilot/
-**/solution*/.ipcache/
-
-# Vivado / Vitis hardware handoff
-**/*.xsa
-
-# 忽略Vivado运行目录（综合/实现的所有中间文件）
-runs/
-
-# 忽略Vivado临时日志与报告（若需要保留报告，可删除对应行）
-*.log
-*.jou
-*.html
+# === Vivado 核心忽略规则（必须保留）===
+# 项目文件
+*.xpr
+*.xpr.user
 *.xml
-*.checkpoint
+*.xml.user
 
-# 忽略比特流文件（若需要版本控制比特流，可删除此行）
+# 缓存和运行目录（最大的垃圾制造者）
+*.cache/
+*.hw/
+*.sim/
+*.ip_user_files/
+*.runs/
+.Xil/
+
+# 日志和临时文件
+*.jou
+*.log
+*.str
+*.debug
+*.backup*
+*.tmp
+*.bak
+
+# IP 相关（这些都是自动生成的，绝对不要提交）
+*.srcs/sources_1/ip/**/synth/
+*.srcs/sources_1/ip/**/simulation/
+*.srcs/sources_1/ip/**/sim_scripts/
+*.srcs/sources_1/ip/**/example_design/
+*.srcs/sources_1/ip/**/doc/
+*.srcs/sources_1/ip/**/.upgrade_log
+*.srcs/sources_1/ip/**/component.xml
+*.srcs/sources_1/ip/**/synth_*.log
+*.srcs/sources_1/ip/**/sim_*.log
+
+# Block Design 生成的垃圾
+*.bd
+*.bd.user
+*.srcs/sources_1/bd/**/hdl/
+*.srcs/sources_1/bd/**/ip/
+*.srcs/sources_1/bd/**/ui/
+
+# 导出文件（偶尔会有人误提交）
+*.xsa
 *.bit
 *.bin
+*.mcs
+*.prm
+*.dcp
+*.rpt
+*.txt
+*.csv
+
+# Vivado Lab Edition / Vitis 相关
 *.ltx
+*.mmi
+*.hbs
+*.xpe
+*.xpr.zip
+*.zip
 
-# 忽略自动生成的脚本（如ISEWrap、runme等）
-*.js
-*.sh
-
-# 忽略临时数据文件
-*.wdf
-*.rst
-
-# 保留核心文件（避免误删，可选）
-!*.xpr       # 保留项目配置文件
-!*.v         # 保留Verilog源文件
-!*.sv        # 保留SystemVerilog源文件
-!*.xdc       # 保留约束文件
-!*.tcl       # 保留Tcl脚本
+# 其他常见
+*.gen/
+*.tmp/
+*.data/
+*.webtalk/
+webtalk_*.log
+vivado*.backup.jou
+vivado*.backup.log
